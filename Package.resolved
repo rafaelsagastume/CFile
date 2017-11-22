@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CoreCFile",
+        "repositoryURL": "https://github.com/rafaelsagastume/module_cfile.git",
+        "state": {
+          "branch": null,
+          "revision": "4febbd3b4b1e9b22d95d07bb02c5b4b9ac37ce6e",
+          "version": "1.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
