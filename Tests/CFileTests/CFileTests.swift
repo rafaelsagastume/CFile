@@ -13,7 +13,11 @@ class CFileTests: XCTestCase {
         	print("archivo aperturado")
         }
 
-        File.Close(FilePointerClose : File.FilePointer!)
+        //write word for example
+        File.Write(FPointer : File.FilePointer!, Word : "Welcome to CFile")
+
+        //Close Pointer
+        File.Close(FPointer : File.FilePointer!)
     }
 
     static var allTests = [
