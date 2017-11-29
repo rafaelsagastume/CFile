@@ -14,10 +14,10 @@ class CFileTests: XCTestCase {
         }
 
         //write word for example
-        File.Write(FPointer : File.FilePointer!, Word : "Welcome to CFile")
+        File.Write(Word : "Welcome to CFile")
 
         //Close Pointer
-        File.Close(FPointer : File.FilePointer!)
+        File.Close()
     }
 
     static var allTests = [

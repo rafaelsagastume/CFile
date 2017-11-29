@@ -21,13 +21,13 @@ public class CFile {
 	}
 
 
-	public func Close(FPointer : UnsafeMutablePointer<FILE>) {
-		fclose(FPointer)
+	public func Close() {
+		fclose(FilePointer)
 	}
 
 
-	public func Write(FPointer : UnsafeMutablePointer<FILE>, Word : UnsafePointer<Int8>!) {
-		fputs(Word, FPointer)
+	public func Write(Word : UnsafePointer<Int8>!) {
+		fputs(Word, FilePointer)
 	}
 
 }
