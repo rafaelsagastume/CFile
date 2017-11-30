@@ -2,12 +2,14 @@
 #include <string.h>
 #include "CoreFile.h"
 
-FILE *CPointerFile() {
-	FILE *file_aux;
-	return file_aux;
-}
+char* CGetString(FILE *file){
+	char line[12000];
 
+	rewind(file);
 
-FILE *CFileOpen(const char *filename, const char *mode) {
-	return fopen(filename, mode);
+	if (fgets(line, 12000, file) != NULL) {
+		return line;
+	}
+
+	return "";
 }

@@ -9,6 +9,7 @@
 //===----------------------------------------------------------------------===//
 
 import CoreCFile
+import CoreFile
 
 
 public class CFile {
@@ -30,4 +31,8 @@ public class CFile {
 		fputs(Word, FilePointer)
 	}
 
+
+	public func Str() -> String {
+		return String(cString: CGetString(FilePointer))
+	}
 }

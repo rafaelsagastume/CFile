@@ -12,9 +12,10 @@ class CFileTests: XCTestCase {
         } else {
         	print("archivo aperturado")
         }
-
         //write word for example
-        File.Write(Word : "Welcome to CFile")
+        File.Write(Word : "Welcome to CFile")   
+        //read one line
+        print("Reading File: \(File.Str())")
 
         //Close Pointer
         File.Close()
