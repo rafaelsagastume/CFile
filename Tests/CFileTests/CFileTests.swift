@@ -17,6 +17,9 @@ class CFileTests: XCTestCase {
         //read one line
         print("Reading File: \(File.Str())")
 
+        //All Str
+        print("Reading File All: \(File.StrAll())")
+
         //Close Pointer
         File.Close()
     }

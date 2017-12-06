@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "CoreFile.h"
 
 char* CGetString(FILE *file){

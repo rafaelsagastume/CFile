@@ -35,4 +35,26 @@ public class CFile {
 	public func Str() -> String {
 		return String(cString: CGetString(FilePointer))
 	}
+
+
+	public func StrAll() -> String {
+		var c : Int
+		var string : String = ""
+
+		rewind(FilePointer)
+
+		while true {
+
+			//Int32 -> C  [To]  Int -> Swift
+			c = Int(fgetc(FilePointer))
+
+			if feof(FilePointer) == 1 {
+				break ;
+			}
+
+			string = string + String(Character(UnicodeScalar(c)!))
+		}
+
+		return string
+	}
 }
