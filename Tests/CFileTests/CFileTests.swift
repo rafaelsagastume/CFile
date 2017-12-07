@@ -6,6 +6,8 @@ class CFileTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
+        var ArrayString : Array<String>
+
         var File = CFile(FileName : "/home/rafael/Desktop/archivo.txt", Mode : "a+")
         if (File.FilePointer == nil) {
         	print("Error al leer el archivo")
@@ -19,6 +21,12 @@ class CFileTests: XCTestCase {
 
         //All Str
         print("Reading File All: \(File.StrAll())")
+
+        //serialize
+        ArrayString = File.Serialize(delimiter : [" ", "W"], ignore : ["\n"]);
+        for word in ArrayString {
+        	print(word)
+        }
 
         //Close Pointer
         File.Close()

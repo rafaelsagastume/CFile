@@ -57,4 +57,33 @@ public class CFile {
 
 		return string
 	}
+
+
+	public func Serialize(delimiter : Array<String>, ignore : Array<String>) -> Array<String> {
+		var wordList : Array<String> = []
+		var stringFile : String
+		var word : String = ""
+
+		stringFile = self.StrAll()
+
+		for (index, char) in stringFile.enumerated() {
+			
+			for (indexDelimiter, charDelimiter) in delimiter.enumerated() {
+				if String(char) == charDelimiter {
+					
+					//complete word
+					wordList.append(word)
+					word = ""
+				}
+			}
+
+			for (indexIgnore, charIgnore) in ignore.enumerated() {
+				if String(char) != charIgnore {
+					word = word + String(char)
+				}
+			}
+		}
+
+		return wordList
+	}
 }
