@@ -63,24 +63,37 @@ public class CFile {
 		var wordList : Array<String> = []
 		var stringFile : String
 		var word : String = ""
+		var addChar : Int = 0
+		var addCharIndex : Int = 0
 
 		stringFile = self.StrAll()
 
-		for (index, char) in stringFile.enumerated() {
-			
-			for (indexDelimiter, charDelimiter) in delimiter.enumerated() {
+		for (_ , char) in stringFile.enumerated() {
+			addCharIndex = 1
+
+			for (_ , charDelimiter) in delimiter.enumerated() {
 				if String(char) == charDelimiter {
-					
-					//complete word
-					wordList.append(word)
-					word = ""
+					addCharIndex = 0
+					break
 				}
 			}
 
-			for (indexIgnore, charIgnore) in ignore.enumerated() {
-				if String(char) != charIgnore {
+			if addCharIndex == 1 {
+				addChar = 1
+
+				for (_ , charIgnore) in ignore.enumerated() {
+					if String(char) == charIgnore {
+						addChar = 0
+						break
+					}
+				}
+
+				if addChar == 1 {
 					word = word + String(char)
 				}
+			} else {
+				wordList.append(word)
+				word = ""
 			}
 		}
 
