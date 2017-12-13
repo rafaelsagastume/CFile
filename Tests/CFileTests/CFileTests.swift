@@ -23,7 +23,7 @@ class CFileTests: XCTestCase {
         print("Reading File All: \(File.StrAll())")
 
         //serialize
-        ArrayString = File.Serialize(delimiter : [" ", "W"], ignore : ["\n", "o"]);
+        ArrayString = File.Serialize(delimiter : [" ", "\n"], ignore : nil, node : ["---->", "=>", "(", ")"]);
         for word in ArrayString {
         	print(word)
         }

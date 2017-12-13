@@ -10,6 +10,7 @@
 
 import CoreCFile
 import CoreFile
+import Foundation
 
 
 public class CFile {
@@ -59,7 +60,7 @@ public class CFile {
 	}
 
 
-	public func Serialize(delimiter : Array<String>, ignore : Array<String>) -> Array<String> {
+	public func Serialize(delimiter : Array<String>, ignore : Array<String>!, node : Array<String>!) -> Array<String> {
 		var wordList : Array<String> = []
 		var stringFile : String
 		var word : String = ""
@@ -81,10 +82,12 @@ public class CFile {
 			if addCharIndex == 1 {
 				addChar = 1
 
-				for (_ , charIgnore) in ignore.enumerated() {
-					if String(char) == charIgnore {
-						addChar = 0
-						break
+				if ignore != nil {
+					for (_ , charIgnore) in ignore.enumerated() {
+						if String(char) == charIgnore {
+							addChar = 0
+							break
+						}
 					}
 				}
 
@@ -92,9 +95,36 @@ public class CFile {
 					word = word + String(char)
 				}
 			} else {
-				wordList.append(word)
-				word = ""
+
+				if node != nil {
+					var wordTemp : String = word
+			
+					//[-->]
+					for wordNode in node {
+
+						wordTemp = wordTemp.replacingOccurrences(of: wordNode, with: "\(delimiter[0])\(wordNode)\(delimiter[0])")
+						wordTemp = wordTemp.replacingOccurrences(of: "\(delimiter[0])\(delimiter[0])", with: "\(delimiter[0])")
+
+					}
+
+					var ListNewWord = wordTemp.components(separatedBy: delimiter[0])
+
+					for wordNew in ListNewWord {
+						wordList.append(wordNew)
+					}
+
+					word = ""
+				} else {
+					wordList.append(word)
+					word = ""
+				}
+				
 			}
+		}
+
+		if word != "" {
+			wordList.append(word)
+			word = ""
 		}
 
 		return wordList
