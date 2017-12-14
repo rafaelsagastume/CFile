@@ -23,6 +23,19 @@ public class CFile {
 	}
 
 
+	public func exists(path : UnsafePointer<Int8>) -> Bool {
+		var File : UnsafeMutablePointer<FILE>?
+
+		File = fopen(path, "r")
+
+		if File != nil {
+			fclose(File)
+			return true
+		}
+		return false
+	}
+
+
 	public func Close() {
 		fclose(FilePointer)
 	}

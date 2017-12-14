@@ -28,6 +28,12 @@ class CFileTests: XCTestCase {
         	print(word)
         }
 
+        if File.exists(path : "/home/rafael/Desktop/archivo2.txt") {
+        	print("File exists")
+        } else {
+        	print("File not exists")
+        }
+
         //Close Pointer
         File.Close()
     }
