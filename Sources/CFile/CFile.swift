@@ -14,19 +14,20 @@ import Foundation
 
 
 public class CFile {
-	
-	var FilePointer : UnsafeMutablePointer<FILE>?
 
 
-	public init(FileName : UnsafePointer<Int8>!, Mode : UnsafePointer<Int8>!) {
-        FilePointer = fopen(FileName, Mode)
+	var FilePath : String = ""
+
+
+	public init(path : String) {
+        self.FilePath = path
 	}
 
 
-	public func exists(path : UnsafePointer<Int8>) -> Bool {
-		var File : UnsafeMutablePointer<FILE>?
 
-		File = fopen(path, "r")
+	public func writable() -> Bool {
+		var File : UnsafeMutablePointer<FILE>?
+		File = fopen(self.FilePath, "r+")
 
 		if File != nil {
 			fclose(File)
@@ -36,40 +37,81 @@ public class CFile {
 	}
 
 
-	public func Close() {
-		fclose(FilePointer)
+
+	public func readable() -> Bool {
+		var File : UnsafeMutablePointer<FILE>?
+		File = fopen(self.FilePath, "r")
+
+		if File != nil {
+			fclose(File)
+			return true
+		}
+		return false
 	}
 
 
-	public func Write(Word : UnsafePointer<Int8>!) {
-		fputs(Word, FilePointer)
+
+	public func Write(Word : String) -> Bool {
+
+		if self.readable() {
+			var File : UnsafeMutablePointer<FILE>?
+			File = fopen(self.FilePath, "a+")
+
+			fputs(Word, File)
+
+			return true
+		} else {
+			return false
+		}
+			
 	}
 
 
-	public func Str() -> String {
-		return String(cString: CGetString(FilePointer))
+
+	public func Str() -> (error: Bool, data: String) {
+
+		if self.readable() {
+
+			var File : UnsafeMutablePointer<FILE>?
+			File = fopen(self.FilePath, "r")
+
+			rewind(File)
+
+			return (error: true, data: String(cString: CGetString(File)))
+
+		} else {
+			return (error: false, data: "")
+		}
 	}
 
 
-	public func StrAll() -> String {
-		var c : Int
-		var string : String = ""
+	public func StrAll() -> (error: Bool, data: String) {
 
-		rewind(FilePointer)
+		if self.readable() {
+			var c : Int
+			var string : String = ""
 
-		while true {
+			var File : UnsafeMutablePointer<FILE>?
+			File = fopen(self.FilePath, "r")
 
-			//Int32 -> C  [To]  Int -> Swift
-			c = Int(fgetc(FilePointer))
+			rewind(File)
 
-			if feof(FilePointer) == 1 {
-				break ;
+			while true {
+
+				//Int32 -> C  [To]  Int -> Swift
+				c = Int(fgetc(File))
+
+				if feof(File) == 1 {
+					break ;
+				}
+
+				string = string + String(Character(UnicodeScalar(c)!))
 			}
 
-			string = string + String(Character(UnicodeScalar(c)!))
+			return (true, string)
+		} else {
+			return (false, "")
 		}
-
-		return string
 	}
 
 
@@ -80,7 +122,7 @@ public class CFile {
 		var addChar : Int = 0
 		var addCharIndex : Int = 0
 
-		stringFile = self.StrAll()
+		stringFile = self.StrAll().data
 
 		for (_ , char) in stringFile.enumerated() {
 			addCharIndex = 1

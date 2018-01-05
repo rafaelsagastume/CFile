@@ -6,36 +6,41 @@ class CFileTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        var ArrayString : Array<String>
+        var File = CFile(path : "/home/rafael/Desktop/archivo.txt")
 
-        var File = CFile(FileName : "/home/rafael/Desktop/archivo.txt", Mode : "a+")
-        if (File.FilePointer == nil) {
-        	print("Error al leer el archivo")
+        print("FilePath: \(File.FilePath)")
+
+        if File.writable() {
+        	print("File is writable")
         } else {
-        	print("archivo aperturado")
+        	print("File not is writable")
         }
-        //write word for example
-        File.Write(Word : "Welcome to CFile")   
-        //read one line
-        print("Reading File: \(File.Str())")
+        
 
+        if File.readable() {
+        	print("File is readable")
+        } else {
+        	print("File not is readable")
+        }
+        
         //All Str
-        print("Reading File All: \(File.StrAll())")
+        print("Reading File All: \(File.StrAll().data)")
+
+        //read one line
+        print("Reading File: \(File.Str().data)")
+
+        //write word for example
+        if File.Write(Word : "Welcome to CFile 2") {
+			print("Data is Write")
+        }
+
 
         //serialize
+        var ArrayString : Array<String>
         ArrayString = File.Serialize(delimiter : [" ", "\n"], ignore : nil, node : ["---->", "=>", "(", ")"]);
         for word in ArrayString {
         	print(word)
         }
-
-        if File.exists(path : "/home/rafael/Desktop/archivo2.txt") {
-        	print("File exists")
-        } else {
-        	print("File not exists")
-        }
-
-        //Close Pointer
-        File.Close()
     }
 
     static var allTests = [
