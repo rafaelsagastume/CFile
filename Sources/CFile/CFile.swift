@@ -77,10 +77,10 @@ public class CFile {
 
 			rewind(File)
 
-			return (error: true, data: String(cString: CGetString(File)))
+			return (error: false, data: String(cString: CGetString(File)))
 
 		} else {
-			return (error: false, data: "")
+			return (error: true, data: "")
 		}
 	}
 
@@ -108,9 +108,9 @@ public class CFile {
 				string = string + String(Character(UnicodeScalar(c)!))
 			}
 
-			return (true, string)
+			return (false, string)
 		} else {
-			return (false, "")
+			return (true, "")
 		}
 	}
 
