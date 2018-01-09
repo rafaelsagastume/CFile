@@ -20,7 +20,7 @@ public class CFile {
 
 
 	public init(path : String) {
-        self.FilePath = path
+		self.FilePath = path
 	}
 
 
@@ -71,23 +71,6 @@ public class CFile {
 	public func Str() -> (error: Bool, data: String) {
 
 		if self.readable() {
-
-			var File : UnsafeMutablePointer<FILE>?
-			File = fopen(self.FilePath, "r")
-
-			rewind(File)
-
-			return (error: false, data: String(cString: CGetString(File)))
-
-		} else {
-			return (error: true, data: "")
-		}
-	}
-
-
-	public func StrAll() -> (error: Bool, data: String) {
-
-		if self.readable() {
 			var c : Int
 			var string : String = ""
 
@@ -122,7 +105,7 @@ public class CFile {
 		var addChar : Int = 0
 		var addCharIndex : Int = 0
 
-		stringFile = self.StrAll().data
+		stringFile = self.Str().data
 
 		for (_ , char) in stringFile.enumerated() {
 			addCharIndex = 1

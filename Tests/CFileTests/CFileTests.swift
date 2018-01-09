@@ -6,7 +6,7 @@ class CFileTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        var File = CFile(path : "/home/rafael/Desktop/archivo.txt")
+        let File = CFile(path : "/home/rafael/Desktop/archivo.txt")
 
         print("FilePath: \(File.FilePath)")
 
@@ -24,9 +24,6 @@ class CFileTests: XCTestCase {
         }
         
         //All Str
-        print("Reading File All: \(File.StrAll().data)")
-
-        //read one line
         print("Reading File: \(File.Str().data)")
 
         //write word for example
