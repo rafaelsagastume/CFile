@@ -8,10 +8,7 @@
 // Copyright © 2017 Rafael Fernando Garcia Sagastume.
 //===----------------------------------------------------------------------===//
 
-import CoreCFile
-import CoreFile
 import Foundation
-
 
 public class CFile {
 
@@ -166,5 +163,55 @@ public class CFile {
 		}
 
 		return wordList
+	}
+
+
+
+	// Load a simple configuration file
+	// Assuming that there are variables in the file with values to be used
+	public func LoadConfig() -> [String:String]! {
+
+		var Dict = [String:String]()
+		var listLine : Array<String> = []
+
+		if self.readable() {
+			var c : Int
+			var string : String = ""
+
+			var File : UnsafeMutablePointer<FILE>?
+			File = fopen(self.FilePath, "r")
+
+			rewind(File)
+
+			while true {
+
+				//Int32 -> C  [To]  Int -> Swift
+				c = Int(fgetc(File))
+
+				if feof(File) == 1 {
+					break ;
+				}
+
+				if String(Character(UnicodeScalar(c)!)) != "\n"{
+					string = string + String(Character(UnicodeScalar(c)!))
+				} else {
+					listLine.append(string)
+					string = ""
+				}
+			}
+
+			listLine.append(string)
+
+			for word in listLine {
+	        	if word != "" {
+	        		var Line = word.components(separatedBy: "=")
+	        		Dict[String(Line[0]).trimmingCharacters(in: .whitespaces)] = Line[1].trimmingCharacters(in: .whitespaces)
+	        	}
+	        }
+
+			return Dict
+		}
+
+	 	return nil
 	}
 }

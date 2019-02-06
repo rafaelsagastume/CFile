@@ -26,10 +26,11 @@ class CFileTests: XCTestCase {
         //All Str
         print("Reading File: \(File.Str().data)")
 
+
         //write word for example
-        if File.Write(Word : "Welcome to CFile 2") {
+        /*if File.Write(Word : "Welcome to CFile 2") {
 			print("Data is Write")
-        }
+        }*/
 
 
         //serialize
@@ -38,6 +39,18 @@ class CFileTests: XCTestCase {
         for word in ArrayString {
         	print(word)
         }
+
+
+
+        /*
+            If the file had these variables, the example would be
+            dbsrc = pro
+            dbdst = dev
+        */
+
+        let config = File.LoadConfig()!
+        print("value: \( config["dbsrc"]!.description )")
+        //value: pro
     }
 
     static var allTests = [
