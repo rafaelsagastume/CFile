@@ -3,7 +3,7 @@
 // Autor: Rafael Fernando Garcia Sagastume.
 // Escuintla, Guatemala
 //
-// Propocito general, es realizar la manipulación de los archivos.
+// Propósito general, es realizar la manipulación de los archivos.
 //
 // Copyright © 2017 Rafael Fernando Garcia Sagastume.
 //===----------------------------------------------------------------------===//
